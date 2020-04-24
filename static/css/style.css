@@ -1,0 +1,16 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #231F20;
+    color: #FFFFFF;
+    overflow: hidden; /* Hide scrollbars */
+    /* #414042 */
+
+}
+
+.btn{
+    background-color: #F1F2F2
+}
+
+.login-form{
+    margin-top: 10vh;
+}
