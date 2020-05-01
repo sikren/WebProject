@@ -1,0 +1,128 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #231F20;
+    color: #FFF;
+    overflow: hidden;
+}
+
+
+/* for login&register page */
+.btn.text-uppercase{
+    background-color: #F1F2F2;
+}
+
+.btn.text-uppercase:hover{
+    background-color: #39FF14;
+}
+
+.login-form{
+    margin-top: 10vh;
+
+}
+
+#register_btn, #login_btn{
+    /* либо менять кнопки, либо работать с CSS */
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+/* search page */
+.form-wrap{
+    font-family: 'GOST Type BU';
+    position: absolute;
+    width: 16vw;
+    height: 60vh;
+    top: 20vh;
+    left: 15vw;
+    background: #FFF;
+    border-radius: 25px;
+    color: #000;
+}
+
+#search-label{
+    font-size: 25pt;
+    position: absolute;
+    margin-left: 2vw;
+    margin-top: 3vh;
+}
+
+.search-box{
+    border-radius: 40px;
+    height: 40px;
+    position: absolute;
+    margin-left: 2vw;
+    margin-top: 10vh;
+    background: #d0d0d0;
+}
+
+.search-btn{
+    border: none;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-txt{
+    margin-top: 8px;
+    margin-left: 5px;
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    font-size: 16px;
+}
+
+.advanced-box{
+    position: absolute;
+    margin-left: 2vw;
+    margin-top: 17vh;
+}
+
+.checkbox{
+    background: 'static/img/icon.png'
+}
+
+.checkbox-label{
+    float: right;
+    width: 13px;
+    height: 13px;
+    display: block;
+    position: relative;
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+/* Doesn't work at all */
+.advanced-parameters{
+    visibility: collapse;
+}
+
+#adv-checkbox + span{
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: url(icons/sicon.png) no-repeat;
+}
+
+/* Doesn't work at all */
+#adv-checkbox:checked ~ .advanced-parameters{
+    visibility: visible;
+}
+
+#adv-checkbox:checked + span{
+    background: url(icons/active_sicon.png) no-repeat;
+}
+
+input[type=checkbox]{
+    display: none;
+}
+
+#advanced{
+    float: left;
+}

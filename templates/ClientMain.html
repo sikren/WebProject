@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="form-wrap">
+        <form class="search-form" method="post" action="">
+            <div id="search-label">
+                Search
+            </div>
+            <div class="search-box">
+                <input class="search-txt" type="text" placeholder="Offer name">
+                <button class="search-btn"> <i class="fas fa-search-location" style="color: #FF8C00;"></i> </button>
+            </div>
+            <div class="advanced-box">
+                <label for="adv-checkbox" id="advanced"> advanced </label>
+                <label class="checkbox-label"><input type="checkbox" id="adv-checkbox"><span></span></label>
+            </div>
+            <div class="advanced-parameters">
+                123
+                321
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
