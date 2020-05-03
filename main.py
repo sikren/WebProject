@@ -1,8 +1,9 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager, login_user, login_required, logout_user
 from data import db_session
 from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
+from forms.SearchForm import SearchForm
 from data.user import User
 
 app = Flask(__name__)
@@ -68,9 +69,17 @@ def register():
                            title='Register')
 
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    form = SearchForm()
+    if request.method == 'POST':
+        return 'success'
+    return render_template('Search.html', form=form)
+
+
 @app.route('/')
-def main_page():
-    return render_template('ClientMain.html')
+def main():
+    return render_template('MainPage.html')
 
 
 if __name__ == '__main__':

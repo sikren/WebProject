@@ -4,7 +4,8 @@
     <div class="login-form d-flex justify-content-center align-items-center">
        <form class="login-form text-center" action="" method="post">
 
-           {{form.hidden_tag()}}
+           {{ form.hidden_tag() }}
+           {{ form.csrf_token }}
 
            <h1 class="mb-4"> LOGIN </h1>
            <div class="form-group">

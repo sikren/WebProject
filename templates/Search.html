@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="form-wrap">
+        <form class="search-form" method="post" action="">
+
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+
+            <div id="search-label">
+                Search
+            </div>
+            <div class="search-box">
+                {{ form.offer_name(class="search-txt",
+                                   placeholder=form.offer_name.label.text,
+                                   type="text")}}
+                <button class="search-btn"> <i class="fas fa-search-location" style="color: #FF8C00;"></i> </button>
+            </div>
+            <div class="advanced-box">
+                <label for="adv-checkbox" id="advanced"> advanced </label>
+                <label class="checkbox-label">{{ form.advanced_checkbox(id="adv-checkbox") }}<span></span></label>
+            </div>
+            <div class="advanced-parameters">
+                <label id="advanced-lonlat"> lonlat: </label>
+                {{ form.lonlat(class="lonlat-txt", placeholder="lon;lat") }}
+            </div>
+        </form>
+
+        <script>
+            $('#adv-checkbox').change(function() {
+                if ($('#adv-checkbox').is(':checked')){
+                    $('.advanced-parameters').css({'visibility': 'visible'});
+                    $('.form-wrap').css({'height': '500px'});
+                } else {
+                    $('.advanced-parameters').css({'visibility': 'collapse'});
+                    $('.form-wrap').css({'height': '200px'});
+                }
+            });
+        </script>
+
+    </div>
+
+{% endblock %}
