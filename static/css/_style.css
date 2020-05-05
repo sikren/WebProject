@@ -1,3 +1,11 @@
+/*
+    1. Header
+    2. Login&Register (page)
+    3. Search (page)
+        3.1 Search wrap
+        3.2 Map wrap
+*/
+
 body{
     font-family: 'Poppins', sans-serif;
     background-color: #231F20;
@@ -5,78 +13,75 @@ body{
     overflow: hidden;
 }
 
-/* For Login&Register page */
-.btn.text-uppercase{
-    background-color: #F1F2F2;
 
-}
+/* 1. Header */
+#navbar-p{ margin: 0 0 0 0; }
 
-.btn.text-uppercase:hover{
-    background-color: #39FF14;
+#login-btn{ border-color: #FF8C00; }
 
-}
-
-.login-form{
-    margin-top: 10vh;
-
-}
-
-#register_btn, #login_btn{
-    /* либо менять кнопки, либо работать с CSS */
-    margin-bottom: auto;
-    margin-top: auto;
-}
+#login-btn:hover{ background-color: #FF8C00; }
 
 
-/* For Search page */
+
+/* 2. Login&Register (page) */
+.btn.text-uppercase{ background-color: #F1F2F2; }
+
+.btn.text-uppercase:hover{ background-color: #FF8C00; }
+
+.login-form{ margin-top: 10vh; }
+
+
+
+/* 3. Search (page) */
+/* 3.1 Search wrap */
 .form-wrap{
-    font-family: 'GOST Type BU';
     position: absolute;
-    width: 16vw;
-    height: 20vh;
     top: 20vh;
     left: 15vw;
+
+    font-family: 'GOST Type BU';
     background: #FFF;
     border-radius: 25px;
     color: #000;
-}
 
-#search-label{
-    font-size: 25pt;
-    position: absolute;
-    margin-left: 2vw;
-    margin-top: 3vh;
+    width: 16vw;
+    height: 200px;
 }
 
 .search-box{
-    border-radius: 40px;
-    height: 40px;
     position: absolute;
     margin-left: 2vw;
     margin-top: 10vh;
+
+    border-radius: 40px;
     background: #d0d0d0;
+
+    height: 40px;
 }
 
 .search-btn{
     border: none;
     float: right;
-    width: 40px;
-    height: 40px;
     border-radius: 50%;
     background: #2f3640;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    width: 40px;
+    height: 40px;
 }
 
 .search-txt{
     margin-top: 8px;
     margin-left: 5px;
+    padding: 0;
+
     border: none;
     background: none;
     outline: none;
     float: left;
-    padding: 0;
     font-size: 16px;
 }
 
@@ -87,13 +92,33 @@ body{
 }
 
 .checkbox-label{
-    float: right;
-    width: 13px;
-    height: 13px;
-    display: block;
     position: relative;
     margin-top: 6px;
     margin-left: 10px;
+    float: right;
+    display: block;
+
+    width: 13px;
+    height: 13px;
+}
+
+.advanced-parameters{ visibility: collapse; }
+
+.lonlat-txt{
+    position: absolute;
+    margin-left: 8vw;
+    margin-top: 20vh;
+    float: left;
+    padding-left: 10px;
+
+    border: none;
+    border-radius: 40px;
+    outline: none;
+    background: #d0d0d0;
+    font-size: 16px;
+
+    height: 25px;
+    width: 100px;
 }
 
 #adv-checkbox + span{
@@ -103,25 +128,11 @@ body{
     background: url(icons/icon.png) no-repeat;
 }
 
-#adv-checkbox:checked + span{
-    background: url(icons/active_icon.png) no-repeat;
+#adv-checkbox:checked + span{ background: url(icons/active_icon.png) no-repeat; }
 
-}
+#adv-checkbox{ display: none; }
 
-input[type=checkbox]{
-    display: none;
-
-}
-
-#advanced{
-    float: left;
-
-}
-
-.advanced-parameters{
-    visibility: collapse;
-
-}
+#advanced{ float: left; }
 
 #advanced-lonlat{
     position: absolute;
@@ -129,19 +140,39 @@ input[type=checkbox]{
     margin-top: 20vh;
 }
 
-.lonlat-txt{
-    border: none;
-    border-radius: 40px;
-    height: 25px;
-    width: 100px;
-    background: #d0d0d0;
-    outline: none;
-    float: left;
-    padding-left: 10px;
-    font-size: 16px;
-
+#search-label{
     position: absolute;
-    margin-left: 8vw;
-    margin-top: 20vh;
+    margin-left: 2vw;
+    margin-top: 3vh;
 
+    font-size: 25pt;
+}
+
+
+/* 3.2 Map wrap */
+.map-picture{
+    position: absolute;
+    top: 20px;
+    left: 440px;
+
+    border-radius: 30px;
+    border-color: #000;
+
+    height: 450px;
+    width: 600px;
+}
+
+.map-wrap{
+    position: absolute;
+    top: 20vh;
+    left: 33vw;
+
+    /* like in form-wrap */
+    font-family: 'GOST Type BU';
+    background: #FFF;
+    border-radius: 40px;
+    color: #000;
+
+    width: 1060px;
+    height: 644px;
 }

@@ -5,6 +5,7 @@ from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
 from forms.SearchForm import SearchForm
 from data.user import User
+from api_module import StaticApi
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -36,10 +37,10 @@ def login():
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         return render_template('LoginTemplate.html',
-                               message="Неправильный логин или пароль",
+                               message="Wrong login or password",
                                form=form, title='Login')
     return render_template('LoginTemplate.html', form=form,
-                           title='Login')
+                           title='Login', message="")
 
 
 # Регистрация
@@ -72,9 +73,14 @@ def register():
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
+
     if request.method == 'POST':
-        return 'success'
-    return render_template('Search.html', form=form)
+        lonlat = form.lonlat.data
+        api = StaticApi([int(ll) for ll in lonlat.split(';')])
+        return render_template('Search.html', form=form,
+                               map_url=api.get_map())
+
+    return render_template('Search.html', form=form, map_url=None)
 
 
 @app.route('/')
@@ -84,4 +90,4 @@ def main():
 
 if __name__ == '__main__':
     db_session.global_init("db/data.sqlite")
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=8080, host='127.0.0.1', debug=True)

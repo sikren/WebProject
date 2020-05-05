@@ -14,7 +14,7 @@
                 {{ form.offer_name(class="search-txt",
                                    placeholder=form.offer_name.label.text,
                                    type="text")}}
-                <button class="search-btn"> <i class="fas fa-search-location" style="color: #FF8C00;"></i> </button>
+                <button class="search-btn" onclick="process(3)"> <i class="fas fa-search-location" style="color: #FF8C00;"></i> </button>
             </div>
             <div class="advanced-box">
                 <label for="adv-checkbox" id="advanced"> advanced </label>
@@ -25,19 +25,23 @@
                 {{ form.lonlat(class="lonlat-txt", placeholder="lon;lat") }}
             </div>
         </form>
-
-        <script>
-            $('#adv-checkbox').change(function() {
-                if ($('#adv-checkbox').is(':checked')){
-                    $('.advanced-parameters').css({'visibility': 'visible'});
-                    $('.form-wrap').css({'height': '500px'});
-                } else {
-                    $('.advanced-parameters').css({'visibility': 'collapse'});
-                    $('.form-wrap').css({'height': '200px'});
-                }
-            });
-        </script>
-
     </div>
 
+    <div class="map-wrap">
+        {% if map_url != None %}
+            <img class="map-picture" src="{{map_url}}" >
+        {% endif %}
+    </div>
+
+    <script type="text/javascript">
+        $('#adv-checkbox').change(function() {
+            if ($('#adv-checkbox').is(':checked')){
+                $('.advanced-parameters').css({'visibility': 'visible'});
+                $('.form-wrap').css({'height': '500px'});
+            } else {
+                $('.advanced-parameters').css({'visibility': 'collapse'});
+                $('.form-wrap').css({'height': '200px'});
+            }
+        });
+    </script>
 {% endblock %}

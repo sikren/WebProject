@@ -18,6 +18,7 @@
                                 placeholder=form.password.label.text,
                                 type="password") }}
            </div>
+           <p style="color: orange;"> {{ message }} </p>
            {{ form.remember_me() }} {{ form.remember_me.label }}
            {{ form.submit(type="submit", class="btn mt-3 rounded-pill btn-lg btn-custom btn-block text-uppercase") }}
 
