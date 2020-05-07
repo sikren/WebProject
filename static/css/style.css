@@ -4,7 +4,7 @@ body{
     color: #FFFFFF;
     overflow: hidden; /* Hide scrollbars */
     /* #414042 */
-
+    height: 100%;
 }
 
 .btn{
@@ -13,4 +13,28 @@ body{
 
 .login-form{
     margin-top: 10vh;
+}
+
+.list-item-smh:hover {
+    background-color: #bbbbbb;
+    text-decoration: None;
+}
+
+.list-item-smh {
+    background-color: #343a40;
+    text-decoration: None;
+}
+
+.list-item-smh.selected {
+    background-color: #d9d9d9!important;
+}
+
+a, a:hover {
+    text-decoration: None;
+}
+
+a.btn.btn-primary {
+    color: #fff;
+    background-color: #0062cc;
+    border-color: #005cbf;
 }

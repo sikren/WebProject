@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row h-75">
+    <div class="card col-sm-4 text-light bg-dark h-100" style="overflow-y: scroll; overflow-x: hide;">
+        <ul class="list-group list-group h-100">
+            {% for dialog in dialogs %}
+            <a href="{{ '/messages?id=' + dialog.id }}">
+                {% if not dialog.selected %}
+                <li class="list-item-smh list-group-item text-light">
+                {% else %}
+                <li class="list-item-smh selected list-group-item text-secondary">
+                {% endif %}
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ dialog.name }}</h5>
+                    </div>
+                    <p>{{ dialog.last_message }}</p>
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-sm-8 h-100" style="overflow-y: scroll; overflow-x: hide;">
+        <div class="chatbody">
+            <ul class="list-group h-100">
+                {% for message in messages %}
+                {% if not message.you %}
+                    <li class="list-group-item text-light bg-dark">
+                {% else %}
+                    <li class="list-group-item text-light bg-secondary">
+                {% endif %}
+                        <div class="d-flex-w-100 justify-content-between">
+                            <b>{{ message.from }}</b>
+                        </div>
+                        <table class="w-100">
+                            <tr>
+                                <td>{{ message.text }}</td>
+                                <td class="float-right"> {{ message.time }} </td>
+                            </tr>
+                        </table>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row h-25">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8">
+        <form action="#" method="post" name="send">
+            <div class="row h-25">
+                <div class="col-sm-10">
+                    <input type="text" class="form-control text-light bg-dark w-100" placeholder="Message..." name="text">
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-primary" href="#" role="button">Send</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let btn = document.querySelector('form[name="send"] > div > div > a');
+    btn.addEventListener('click', () => {
+        document.querySelector('form[name="send"]').submit();
+        btn.blur();
+    });
+</script>
+{% endblock %}
