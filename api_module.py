@@ -17,7 +17,38 @@ class StaticApi:
     def set_z(self, z):
         self.z = z
 
-    def get_map(self):
+    def get_map(self, task):
+        tags = self.get_tags()
+        tags_for_task = []
+        others_tags = []
+
+        for tag in tags:
+            if task in tag.title:
+                tags_for_task.append(tag)
+            else:
+                others_tags.append(tag)
+
+        pt = []
+        for i, tag in enumerate(tags):
+            if tag in tags_for_task:
+                pt.append(f"{tag.lon},{tag.lat},pm2ntm{i + 1}")
+            else:
+                pt.append(f"{tag.lon},{tag.lat},pm2grm{i + 1}")
+
+        parameters = {
+            "apikey": self.api_key,
+            "z": self.z,
+            "ll": f"{self.lonlat[0]},{self.lonlat[1]}",
+            "l": "map",
+            "pt": "~".join(pt)
+        }
+        response = requests.get(self.api_link, params=parameters)
+        print(response.url)
+        if response:
+            return response.url, [tags_for_task, others_tags]
+        return None, [tags_for_task, others_tags]
+
+    def get_tags(self):
         session = db_session.create_session()
 
         lon, lat = self.lonlat
@@ -27,21 +58,9 @@ class StaticApi:
         d_lon = 0.5 * (360 / 2 ** (self.z - 1))
         d_lat = 0.5 * (180 / 2 ** (self.z - 1))
 
-        # фильтр меток по координатам карты
         tags = []
         for offer in session.query(Offer).filter(Offer.lon > lon - d_lon, Offer.lon < lon + d_lon,
                                                  Offer.lat > lat - d_lat, Offer.lat < lat + d_lat).all():
-            tags.append(f"{offer.lon},{offer.lat},comma")
+            tags.append(offer)
 
-        parameters = {
-            "apikey": self.api_key,
-            "z": self.z,
-            "ll": f"{lon},{lat}",
-            "l": "map",
-            "pt": "~".join(tags)
-        }
-
-        response = requests.get(self.api_link, params=parameters)
-        if response:
-            return response.url
-        return None
+        return tags

@@ -31,6 +31,46 @@
         {% if map_url != None %}
             <img class="map-picture" src="{{map_url}}" >
         {% endif %}
+
+        {% if tags != None %}
+            <div class="tags-list">
+                {% if tags[0] | length > 0 %}
+                    <h4 align="center"> Tags for your request </h4>
+                {% endif %}
+                {% for tag in tags[0] %}
+                    <div class="tag-info col-md6 border rounded">
+                        <h2 class="tag-title"> {{ loop.index }}. {{ tag.title }} </h2>
+                        {% if tag.description != None %}
+                            <div class="tag-description">
+                                Info: {{ tag.description }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                {% if tags[1] | length > 0 %}
+                    <h4 align="center"> Other Tags </h4>
+                {% endif %}
+
+                {% for tag in tags[1] %}
+                    <div class="tag-info col-md6 border rounded">
+                        <h2 class="tag-title"> {{ loop.index + tags[0] | length }}. {{ tag.title }} </h2>
+                        {% if tag.description != None %}
+                            <div class="tag-description">
+                                Info: {{ tag.description }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+            </div>
+        {% endif %}
+
+        <div class="map-legend">
+            <p> <img src="{{url_for('static', filename='img/required_tag.png')}}"> - Tags, corresponding to the request </p>
+            <p> <img src="{{url_for('static', filename='img/other_tag.png')}}"> - Other tags </p>
+        </div>
+
     </div>
 
     <script type="text/javascript">

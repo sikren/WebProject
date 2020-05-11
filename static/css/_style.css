@@ -155,7 +155,7 @@ body{
     top: 20px;
     left: 440px;
 
-    border-radius: 30px;
+    border-radius: 20px;
     border-color: #000;
 
     height: 450px;
@@ -176,3 +176,35 @@ body{
     width: 1060px;
     height: 644px;
 }
+
+.map-legend{
+    position: absolute;
+    top: 500px;
+    left: 440px;
+}
+
+.tags-list{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    overflow-x: auto;
+    background: #d0d0d0;
+    border: 2px solid #231F20;
+    border-radius: 20px;
+
+    width: 400px;
+    height: 600px;
+}
+
+.tag-info{
+    background: #FFF;
+    border: 1px solid #231F20;
+}
+
+.tag-title{
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.tag-description{ margin-left: 15px; }

@@ -76,11 +76,16 @@ def search():
 
     if request.method == 'POST':
         lonlat = form.lonlat.data
-        api = StaticApi([int(ll) for ll in lonlat.split(';')])
-        return render_template('Search.html', form=form,
-                               map_url=api.get_map())
+        task = form.offer_name.data
 
-    return render_template('Search.html', form=form, map_url=None)
+        api = StaticApi([int(ll) for ll in lonlat.split(';')])
+
+        url, tags = api.get_map(task)
+        return render_template('Search.html', form=form,
+                               map_url=url, tags=tags)
+
+    return render_template('Search.html', form=form, map_url=None,
+                           tags=None)
 
 
 @app.route('/')
