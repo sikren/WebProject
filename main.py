@@ -1,10 +1,12 @@
 from flask import Flask, render_template, redirect, request
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data import db_session
 from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
 from forms.SearchForm import SearchForm
+from forms.EditProfileForm import ProfileForm
 from data.user import User
+from data.offer import Offer
 from api_module import StaticApi
 
 app = Flask(__name__)
@@ -71,6 +73,7 @@ def register():
 
 
 @app.route('/search', methods=['GET', 'POST'])
+@login_required
 def search():
     form = SearchForm()
 
@@ -91,6 +94,44 @@ def search():
 @app.route('/')
 def main():
     return render_template('MainPage.html')
+
+
+@app.route('/profile')
+@login_required
+def profile():
+    session = db_session.create_session()
+    user_tags = session.query(Offer).filter(Offer.user_id == current_user.id).all()
+    return render_template('ProfilePage.html', user_tags=user_tags)
+
+
+@app.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = ProfileForm()
+    if request.method == 'POST':
+        username = form.username.data
+        email = form.email.data
+        about = form.about.data
+
+        session = db_session.create_session()
+        if username != '' and session.query(User).filter(User.username == username, User.id != current_user.id).first():
+            return render_template('EditProfilePage.html', form=form, message='This username is already registered')
+
+        session = db_session.create_session()
+        if email != '' and session.query(User).filter(User.email == email, User.id != current_user.id).first():
+            return render_template('EditProfilePage.html', form=form, message='This email is already registered')
+
+        user = session.query(User).filter(User.id == current_user.id).first()
+        if username != '':
+            user.username = username
+        if email != '':
+            user.email = email
+        if about != '':
+            user.about = about
+        session.commit()
+        return redirect('/profile')
+
+    return render_template('EditProfilePage.html', form=form, message='')
 
 
 if __name__ == '__main__':

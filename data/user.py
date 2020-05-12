@@ -12,6 +12,9 @@ class User(SqlAlchemyBase, UserMixin):
     username = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     email = sqlalchemy.Column(sqlalchemy.String,
                               index=True, unique=True, nullable=True)
+    about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    photo = sqlalchemy.Column(sqlalchemy.Binary, nullable=True)
+
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     def set_password(self, password):
